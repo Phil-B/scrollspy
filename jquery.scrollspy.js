@@ -14,8 +14,7 @@
                 focalPoint: 0.5, // (0 - 1) The part of the screen where an element is considered to be dominant
                 edgeSnapTolerance: 0 // The additional area which is considered to be the top or bottom of the screen
             }
-
-            $.extend(options, defaults);
+            options = $.extend(defaults, options);
 
             $(window).bind('scroll', function (e) {
 
@@ -26,7 +25,7 @@
                 viewportMid = scrollTop + $(window).height() * options.focalPoint; // Get the offset of the middle of the viewport in relation to the document
                 var dominantElement = getDominantElement();
 
-                if (activeElement != null && dominantElement.get(0) != activeElement.get(0) ) {
+                if (activeElement == null || dominantElement.get(0) != activeElement.get(0) ) {
 
                     if ($.isFunction(options.onChange)) {
                         options.onChange(dominantElement);
